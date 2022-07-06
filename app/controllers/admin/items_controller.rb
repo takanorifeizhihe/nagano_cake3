@@ -10,6 +10,11 @@ class Admin::ItemsController < ApplicationController
   def create
     @item = Item.new(item_params)
     @item.save
+    if @item.errors.any?
+      @item.errors.full_messages.each do |msg|
+        pp msg
+      end
+    end
     redirect_to admin_items_path
   end
 
