@@ -1,10 +1,15 @@
 Rails.application.routes.draw do
-devise_for :admin, skip: [:registrations, :passwords] ,controllers: {
-  sessions: "admin/sessions"
-}
+# 顧客用
+# URL /customers/sign_in ...
 devise_for :customers,skip: [:passwords], controllers: {
   registrations: "public/registrations",
   sessions: 'public/sessions'
+}
+
+# 管理者用
+# URL /admin/sign_in ...
+devise_for :admin, skip: [:registrations, :passwords] ,controllers: {
+  sessions: "admin/sessions"
 }
 
 # 顧客用
@@ -25,10 +30,13 @@ resources :order_infos, :only => [:new, :index, :create, :show ]
 post '/oder_infos/confirm', to: 'order_infos#confirm'
 post '/oder_infos/complete', to: 'order_infos#complete'
 #customers
-resources :customers, :only => [:edit, :update ]
+patch '/customers/withdraw', to: 'customers#withdraw'
+resources :customers, :only => [:update]
+get 'customers/info/edit', to: 'customers#edit'
+#patch 'customers/info' , to: 'customers#update' 
 get '/customers/my_page', to: 'customers#show'
 get '/customers/unsubscribe', to: 'customers#unsubscribe'
-patch '/customers/withdraw', to: 'customers#withdraw'
+
 
 end
 

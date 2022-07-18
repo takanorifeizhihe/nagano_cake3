@@ -6,18 +6,18 @@
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
-    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
   <body>
     <header>
-       <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
       <div class="container">
         <a class="navbar-brand" href="/admin"><span>Logo</span></a>
         <div class="collapse navbar-collapse" id="navbarNavDropdown">
           <ul class="navbar-nav ml-auto">
-            <% if signed_in? %>
+            <% if admin_signed_in? %>
             <li>
               <%= link_to admin_items_path,class:'nav-link text-light' do %>
               <i class="fas fa-home"></i>
@@ -45,9 +45,37 @@
             <li>
               <%= link_to destroy_admin_session_path, method: :delete,class:'nav-link text-light' do %>
               <i class="fas fa-sign-out-alt"></i>
-              <span>Log out</span>
+              <span>ログアウト</span>
               <% end %>
             </li>
+            
+            <% elsif customer_signed_in? %>
+            
+            <p class='nav-link text-light'>ようこそ<%= current_customer.first_name %>さん！</p>
+            <li>
+              <%= link_to customers_my_page_path,class:'nav-link text-light' do %>
+              <i class="fas fa-users"></i>
+              <span>マイページ</span>
+              <% end %>
+            </li>
+            <li>
+              <%= link_to items_path,class:'nav-link text-light' do %>
+              <i class="fas fa-book-open"></i>
+              <span>商品一覧</span>
+              <% end %>
+            </li>
+            <li>
+              <%= link_to cart_items_path,class:'nav-link text-light' do %>
+              <i class="fas fa-book-open"></i>
+              <span>カート</span>
+              <% end %>
+            </li>
+            <li>
+              <%= link_to destroy_customer_session_path, method: :delete,class:'nav-link text-light' do %>
+              <i class="fas fa-sign-out-alt"></i>
+              <span>ログアウト</span>
+              <% end %>
+            
             <% else %>
             <li>
               <%= link_to about_path,class:'nav-link text-light' do %>
@@ -68,7 +96,7 @@
               <% end %>
             </li>
             <li>
-              <%= link_to admin_session_path,class:'nav-link text-light' do %>
+              <%= link_to customer_session_path,class:'nav-link text-light' do %>
               <i class="fas fa-sign-in-alt"></i>
               <span>ログイン</span>
               <% end %>
@@ -79,7 +107,7 @@
       </div>
       </nav>
     </header>
-    </header>
+    <%= render 'layouts/flash' %>
     <%= yield %>
   </body>
 </html>

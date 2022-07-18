@@ -1,2 +1,31 @@
-<h1>Admin::Homes#top</h1>
-<p>Find me in app/views/admin/homes/top.html.erb</p>
+<h1>注文履歴一覧</h1>
+
+<table class="table table-hover table-inverse">
+  
+  <thead>
+    <tr>
+      <th>購入日時</th>
+      <th>購入者</th>
+      <th>注文個数</th>
+      <!--<th>注文ステータス</th>-->
+    </tr>
+  </thead>
+  <tbody>
+    <% @order_infos.each do |order_info| %>
+    <tr>
+      <%= link_to order_info_path(order_info.id) do %>
+        <td><%= order_info.created_at %></td>
+      <% end %>
+      <td>
+        <%= order_info.name %>
+      </td>
+      <td>
+        <%= order_info.order_detail.amount %>
+      </td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= paginate @order_infos %>
+

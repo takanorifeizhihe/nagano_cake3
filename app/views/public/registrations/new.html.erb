@@ -1,15 +1,46 @@
 <h2>Sign up</h2>
 
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-  <%= render "publics/shared/error_messages", resource: resource %>
+  <%= render "public/shared/error_messages", resource: resource %>
 
   <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+    <%= f.label :'名前' %> 
+    <%= f.label :'(姓)' %> 
+    <%= f.text_field :first_name, autofocus: true, autocomplete: "first_name" %> 
+    <%= f.label :'(名)' %>  
+    <%= f.text_field :last_name, autofocus: true, autocomplete: "last_name" %> </br>
+  </div>
+  
+  <div class="field">
+    <%= f.label :'フリガナ' %> 
+    <%= f.label :'(セイ)' %> 
+    <%= f.text_field :first_name_kana, autofocus: true, autocomplete: "first_name_kana" %> 
+    <%= f.label :'(メイ)' %>  
+    <%= f.text_field :last_name_kana, autofocus: true, autocomplete: "last_name_kana" %> </br>
   </div>
 
   <div class="field">
-    <%= f.label :password %>
+    <%= f.label :'メールアドレス' %> 
+    <%= f.email_field :email, autofocus: true, autocomplete: "email" %><br />
+  </div>
+  
+  <div class="field">
+    <%= f.label :'郵便番号(ハイフンなし)' %> 
+    <%= f.number_field :postal_code, autofocus: true, autocomplete: "postal_code" %><br />
+  </div>
+  
+  <div class="field">
+    <%= f.label :'住所' %> 
+    <%= f.text_area :address, autofocus: true, autocomplete: "address" %><br />
+  </div>
+  
+  <div class="field">
+    <%= f.label :'電話番号' %> 
+    <%= f.number_field :telephone_number, autofocus: true, autocomplete: "telephone_number" %><br />
+  </div>
+
+  <div class="field">
+    <%= f.label :'パスワード' %>
     <% if @minimum_password_length %>
     <em>(<%= @minimum_password_length %> characters minimum)</em>
     <% end %><br />
@@ -22,8 +53,12 @@
   </div>
 
   <div class="actions">
-    <%= f.submit "Sign up" %>
+    <%= f.submit "新規登録" %>
   </div>
+  
+  <h2>既に登録済みの方は</h2>
+  
 <% end %>
+
 
 <%= render "public/shared/links" %>

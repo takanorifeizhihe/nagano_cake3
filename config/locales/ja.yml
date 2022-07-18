@@ -16,7 +16,4 @@ ja:
         production_pending: "制作待ち"
         in_progress: "製作中"
         finished: "制作完了"
-  activerecord:
-    errors:
-      messages:
-        record_invalid: "不正なデータ"
+  
