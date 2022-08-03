@@ -20,15 +20,18 @@ get '/about', to: 'homes#about'
 #addresses
 resources :addresses, :only => [:index, :edit, :create, :update, :destroy ]
 #cart_items
-resources :cart_items, :only => [:index, :create, :update ]
+get '/cart_items', to: 'cart_items#index'
+delete '/cart_items', to: 'cart_items#destroy_items'
+patch '/cart_items' , to: 'cart_items#update'
+resources :cart_items, :only => [:create, :update ]
 delete '/cart_items/:id', to: 'cart_items#destroy'
-delete '/cart_items/destroy_items', to: 'cart_items#destroy_items'
 #items
 resources :items, :only => [:index, :show ]
 #order_infos
+post '/order_infos/confirm', to: 'order_infos#confirm'
+get '/order_infos/complete', to: 'order_infos#complete'
 resources :order_infos, :only => [:new, :index, :create, :show ]
-post '/oder_infos/confirm', to: 'order_infos#confirm'
-post '/oder_infos/complete', to: 'order_infos#complete'
+
 #customers
 patch '/customers/withdraw', to: 'customers#withdraw'
 resources :customers, :only => [:update]
@@ -52,7 +55,7 @@ resources :genres, :only => [:index, :create, :update, :edit ]
 #customers
 resources :customers, :only => [:index, :show, :update, :edit ]
 #order_infos
-resources :order_infos, :only => [:show, :update ]
+resources :order_infos, :only => [:index, :show, :update ]
 #order_details
 patch '/order_details/:id', to: 'order_details#update'  
   

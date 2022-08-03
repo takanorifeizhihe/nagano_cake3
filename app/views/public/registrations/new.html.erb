@@ -26,7 +26,7 @@
   
   <div class="field">
     <%= f.label :'郵便番号(ハイフンなし)' %> 
-    <%= f.number_field :postal_code, autofocus: true, autocomplete: "postal_code" %><br />
+    <%= f.text_field :postal_code, autofocus: true, autocomplete: "postal_code" %><br />
   </div>
   
   <div class="field">
@@ -36,7 +36,7 @@
   
   <div class="field">
     <%= f.label :'電話番号' %> 
-    <%= f.number_field :telephone_number, autofocus: true, autocomplete: "telephone_number" %><br />
+    <%= f.text_field :telephone_number, autofocus: true, autocomplete: "telephone_number" %><br />
   </div>
 
   <div class="field">

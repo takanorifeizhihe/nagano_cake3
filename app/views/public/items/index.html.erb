@@ -9,7 +9,9 @@
 
 <h1>商品一覧(全<%= @items.count %>件)</h1>
   <% @items.each do |item| %>
-    <%= image_tag item.get_image(80,80) %></br>
+    <%= link_to item_path(item.id) do %>
+      <%= image_tag item.get_image(80,80) %>
+    <% end %></br>
     <%= item.name%></br>
     ¥<%= item.price%>円</br>
   <% end %>

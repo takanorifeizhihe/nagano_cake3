@@ -1,2 +1,46 @@
-<h1>Admin::OrderInfos#show</h1>
-<p>Find me in app/views/admin/order_infos/show.html.erb</p>
+<h2>注文履歴詳細</h2>
+<h3>購入者</h3>
+<%= %>
+<h3>注文日</h3>
+<%= %>
+<h3>配送先</h3>
+<%= %>
+<h3>支払方法</h3>
+<%= %>
+<h3>注文ステータス</h3>
+<%= form_with model:@order_info do |f| %>
+ <%= select :status, OrderInfo.statuses.keys.to_a, include_blank: true %>
+ <%= f.submit '更新' %>
+<% end %>
+
+<table>
+ <tr>
+  <th>商品名</th>
+  <th>単価(税込)</th>
+  <th>数量</th>
+  <th>小計</th>
+  <th>制作ステータス</th>
+ </tr>
+ <% @order_infos.each do |order_info| %>
+ <tr>
+  <td>
+   <%= order_info.order_detail.item.name %>
+  </td>
+  <td>
+   <%= order_info.order_detail.price %>
+  </td>
+  <td>
+   <%= order_info.order_detail.amount %>
+  </td>
+  <td>
+   <%= order_info.order_detail.price * amount %>
+  </td>
+  <td>
+   <%= form_with model:@order_detail do |f| %>
+     <%= select :making_status, OrderDetail.making_statuses.keys.to_a, include_blank: true %>
+     <%= f.submit '更新' %>
+   <% end %>
+  </td>
+ </tr>
+ <% end %>
+</table>

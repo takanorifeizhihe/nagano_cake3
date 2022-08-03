@@ -1,27 +1,46 @@
-<p class="border">
-  <span>ジャンル検索</span>
-  <p class="border-top">
-    <% @genres.each do |genre| %>
-      <%= genre.name %></br>
-    <% end %>
-  </p>
-</p>
-
-<p class="border">
-  <span>ようこそ、ながのCAKEへ！</br>
-        このサイトは、ケーキ販売のECサイトになります。</br>
-        会員でない方も商品の閲覧はできますが、</br>
-        購入には会員登録が必要になります。</br>
-  </span>
-</p>
-
-<h1>新着商品</h1>
-  <% @items.each do |item| %>
-    <%= image_tag item.get_image(80,80) %></br>
-    <%= item.name%></br>
-    ¥<%= item.price%>円</br>
-  <% end %>
-  
-  <%= link_to items_path do %>
-    <span>すべての商品を見る</span>
-  <% end %>
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <span class="border">
+        <span class="border">
+          <span>ジャンル検索</span></br>
+        </span>
+        <!--<p class="border-top">-->
+          <% @genres.each do |genre| %>
+            <%= link_to >
+              <%= genre.name %></br>
+          <% end %>
+        <!--</p>-->
+      </span>
+    </div>
+    <div class="col-5">
+      <p class="border">
+        <span>ようこそ、ながのCAKEへ！</br>
+              このサイトは、ケーキ販売のECサイトになります。</br>
+              会員でない方も商品の閲覧はできますが、</br>
+              購入には会員登録が必要になります。</br>
+        </span>
+      </p>
+    </div>
+    <div class="col">
+    </div>
+  </div>
+  <div class="row">
+    <div class="col">
+    </div>
+    <div class="col-6">
+      <h1>新着商品</h1>
+        <% @items.each do |item| %>
+          <%= image_tag item.get_image(80,80) %></br>
+          <%= item.name%></br>
+          ¥<%= item.price%>円</br>
+        <% end %>
+        
+        <%= link_to items_path do %>
+          <span>すべての商品を見る</span>
+        <% end %>
+    </div>
+    <div class="col">
+    </div>
+  </div>
+</div>
