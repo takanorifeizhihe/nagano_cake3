@@ -9,7 +9,9 @@ class Admin::OrderInfosController < ApplicationController
   end
   
   def show
-    @order_infos = @order_info.OrderDetail.all
+    @order_info = OrderInfo.find(params[:id])
+    @order_details = @order_info.order_details
+    @sum = 0
   end
 
   def update

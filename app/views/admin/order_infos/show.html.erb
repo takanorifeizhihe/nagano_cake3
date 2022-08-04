@@ -1,12 +1,12 @@
 <h2>注文履歴詳細</h2>
 <h3>購入者</h3>
-<%= %>
+<%= @order_info.name %>
 <h3>注文日</h3>
-<%= %>
+<%= @order_info.created_at.strftime('%Y/%m/%d') %>
 <h3>配送先</h3>
-<%= %>
+<%= @order_info.address_display %>
 <h3>支払方法</h3>
-<%= %>
+<%= @order_info.payment_method_i18n %>
 <h3>注文ステータス</h3>
 <%= form_with model:@order_info do |f| %>
  <%= select :status, OrderInfo.statuses.keys.to_a, include_blank: true %>
@@ -21,19 +21,19 @@
   <th>小計</th>
   <th>制作ステータス</th>
  </tr>
- <% @order_infos.each do |order_info| %>
+ <% @order_details.each do |order_detail| %>
  <tr>
   <td>
-   <%= order_info.order_detail.item.name %>
+   <%= order_detail.item.name %>
   </td>
   <td>
-   <%= order_info.order_detail.price %>
+   <%= order_detail.price.to_s(:delimited) %>
   </td>
   <td>
-   <%= order_info.order_detail.amount %>
+   <%= order_detail.amount %>
   </td>
   <td>
-   <%= order_info.order_detail.price * amount %>
+   <%= order_detail.subtotal.to_s(:delimited) %>
   </td>
   <td>
    <%= form_with model:@order_detail do |f| %>
@@ -41,6 +41,14 @@
      <%= f.submit '更新' %>
    <% end %>
   </td>
+   <% @sum += order_detail.subtotal %>
  </tr>
  <% end %>
 </table>
+
+<h3>商品合計</h3>
+<%= @sum.to_s(:delimited) %>円</br>
+<h3>送料</h3>
+<%= @order_info.postage.to_s(:delimited) %>円</br>
+<h3>請求金額合計</h3>
+<%= (@sum + @order_info.postage).to_s(:delimited) %>円

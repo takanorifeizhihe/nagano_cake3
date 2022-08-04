@@ -35,7 +35,7 @@
     <tr>
       <th>商品合計</th>
       <td>
-        <%= ((@order_info.billing_amount) - (@order_info.postage)).to_s(:delimited) %>
+        <%= @order_info.order_details.sum(:price).to_s(:delimited) %>
       </td>
     </tr>
     <tr>

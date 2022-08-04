@@ -19,7 +19,7 @@ class Public::OrderInfosController < ApplicationController
       order_detail.order_info_id = @order_info.id
       order_detail.item_id= cart_item.item_id
       order_detail.amount = cart_item.amount
-      order_detail.price = cart_item.item.price
+      order_detail.price = (cart_item.item.price * 1.1).floor
       order_detail.save
     end
        
