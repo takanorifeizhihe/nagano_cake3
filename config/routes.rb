@@ -22,9 +22,7 @@ resources :addresses, :only => [:index, :edit, :create, :update, :destroy ]
 #cart_items
 get '/cart_items', to: 'cart_items#index'
 delete '/cart_items', to: 'cart_items#destroy_items'
-patch '/cart_items' , to: 'cart_items#update'
-resources :cart_items, :only => [:create, :update ]
-delete '/cart_items/:id', to: 'cart_items#destroy'
+resources :cart_items, :only => [:create, :update, :destroy ]
 #items
 resources :items, :only => [:index, :show ]
 #order_infos
@@ -34,8 +32,7 @@ resources :order_infos, :only => [:new, :index, :create, :show ]
 
 #customers
 patch '/customers/withdraw', to: 'customers#withdraw'
-resources :customers, :only => [:update]
-get 'customers/info/edit', to: 'customers#edit'
+resources :customers, :only => [:update, :edit]
 #patch 'customers/info' , to: 'customers#update' 
 get '/customers/my_page', to: 'customers#show'
 get '/customers/unsubscribe', to: 'customers#unsubscribe'
@@ -47,7 +44,7 @@ end
 # 管理者用
 namespace :admin do
 #homes
-get '/', to: 'homes#top'
+root to: 'homes#top'
 #items
 resources :items, :only => [:new, :index, :create, :show, :update, :edit ]
 #genres
@@ -57,8 +54,7 @@ resources :customers, :only => [:index, :show, :update, :edit ]
 #order_infos
 resources :order_infos, :only => [:index, :show, :update ]
 #order_details
-patch '/order_details/:id', to: 'order_details#update'  
-  
+resources :order_details, :only => [:update]  
 end
 
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html

@@ -1,21 +1,25 @@
 class Admin::ItemsController < ApplicationController
+  
+  before_action :authenticate_admin!
+  
   def new
     @item=Item.new
   end
 
   def index
-    @items = Item.page(params[:page])
+    @items = Item.all.page(params[:page]).per(10)
   end
 
   def create
     @item = Item.new(item_params)
-    @item.save
+    #binding.pry
+    @item.save!
     if @item.errors.any?
       @item.errors.full_messages.each do |msg|
         pp msg
       end
     end
-    redirect_to admin_items_path
+    redirect_to admin_item_path(@item)
   end
 
   def show

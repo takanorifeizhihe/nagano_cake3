@@ -1,22 +1,32 @@
-<h2>注文履歴一覧</h2>
-
-<table>
-  <tr>
-    <th>購入日時</th>
-    <th>購入者</th>
-    <th>注文個数</th>
-    <th>注文ステータス</th>
-  </tr>
-  <% @order_infos.each do |order_info| %>
-    <tr>
-      <%= link_to order_info_path(order_info.id) do %>
-        <td><%= order_info.created_at.strftime('%Y/%m/%d') %></td>
-      <% end %>
-      <td><%= order_info.customer.first_name %><%= order_info.customer.last_name %></td>
-      <td><%= order_info.total_amount %></td>
-      <td><%= order_info.status_i18n %></td>
-    </tr>
-  <% end %>
-</table>
-
-<%= paginate @order_infos %>
+<div class="container">  
+   <div class="row m-3">
+    <h3>  
+      <span class="bg-secondary px-2">注文履歴一覧</span><br>
+    </h3>
+    <table class="table table-hover table-inverse">
+      <thead class="table-secondary">
+        <tr>
+          <th>購入日時</th>
+          <th>購入者</th>
+          <th>注文個数</th>
+          <th>注文ステータス</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @order_infos.each do |order_info| %>
+        <tr>
+          <td>
+            <%= link_to order_info_path(order_info.id) do %>
+              <%= order_info.created_at.strftime('%Y/%m/%d') %>
+            <% end %>
+          </td>
+          <td><%= order_info.customer.first_name %><%= order_info.customer.last_name %></td>
+          <td><%= order_info.total_amount %></td>
+          <td><%= order_info.status_i18n %></td>
+        </tr>
+        <% end %>
+      </tbody>
+    </table>
+    <%= paginate @order_infos %>
+   </div>
+</div>

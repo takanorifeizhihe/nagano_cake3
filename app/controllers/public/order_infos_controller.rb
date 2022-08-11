@@ -1,11 +1,14 @@
 class Public::OrderInfosController < ApplicationController
+  
+  before_action :authenticate_customer!
+  
   def new
     @order_info = OrderInfo.new
   end
 
   def index
     
-    @order_infos = OrderInfo.all
+    @order_infos = current_customer.order_infos
   end
 
   def create

@@ -1,45 +1,50 @@
-
-<h2>商品一覧</h2>
-
-
-<table class="table table-hover table-inverse">
-  
-  <%= link_to new_admin_item_path do %>  
-    <h2><i class="fas fa-plus-circle"></i><h2>
-  <% end %>
-  
-  <thead>
-    <tr>
-      <th>商品ID</th>
-      <th>商品名</th>
-      <th>税抜価格</th>
-      <th>ジャンル</th>
-      <th>ステータス</th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @items.each do |item| %>
-    <tr>
-      <td><%= item.id %></td>
-      <td>
-        <%= link_to admin_item_path(item.id) do %>
-          <%= item.name %>
+<div class="container">  
+   <div class="row justify-content-between">
+     <div class="col-4">
+      <h3>  
+        <span class="bg-secondary px-2">商品一覧</span><br>
+      </h3>
+    </div>
+    <div class="col-4">
+      <h2 class="pull-right">
+        <%= link_to new_admin_item_path do %>  
+          <button class="fas fa-plus-circle"></button>
         <% end %>
-      </td>
-      <td><%= item.price %></td>
-      <td><%= item.genre.name %></td>
-      <% if item.is_active == true %>
-        <td>販売中</td>
-      <% else %>
-        <td>販売停止中</td>
-      <% end %>
-    </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<%= paginate @items %>
-
+      </h2>
+    </div>
+   </div>
+    <table class="table table-hover table-inverse">
+      <thead class="table-secondary">
+        <tr>
+          <th>商品ID</th>
+          <th>商品名</th>
+          <th>税抜価格</th>
+          <th>ジャンル</th>
+          <th>ステータス</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @items.each do |item| %>
+        <tr>
+          <td><%= item.id %></td>
+          <td class="text-decoration-underline">
+            <%= link_to admin_item_path(item.id) do %>
+              <%= item.name %>
+            <% end %>
+          </td>
+          <td><%= item.price.to_s(:delimited) %></td>
+          <td><%= item.genre.name %></td>
+          <% if item.is_active == true %>
+            <td class="text-success">販売中</td>
+          <% else %>
+            <td class="text-secondary">販売停止中</td>
+          <% end %>
+        </tr>
+        <% end %>
+      </tbody>
+    </table>
+   <div class="text-right"><%= paginate @items %></div>
+</div>
 
 
 

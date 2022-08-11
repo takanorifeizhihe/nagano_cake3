@@ -1,20 +1,31 @@
-<h2>商品詳細</h2>
-
-<%= image_tag @item.get_image(80,80) %>
-<h2>商品名</h2>
-<%= @item.name %></br>
-<h2>商品紹介</h2>
-<%= @item.introduction %></br>
-<h2>ジャンル</h2>
-<%= @item.genre.name %></br>
-<h2>税込価格(税抜価格)</h2>
-<%= (@item.price * 1.1).floor %> (<%= @item.price %>) 円</br>
-<h2>販売ステータス</h2>
-<% if @item.is_active == true %>
-  <h2>販売中</h2>
-<% else %>
-  <h2>販売停止中</h2>
-<% end %>
-<%= link_to edit_admin_item_path(@item.id) do %>
-  <h2>編集する</h2>
-<% end %>
+<div class="container">
+  <div class="row m-3"> 
+    <h3>  
+      <span class="bg-secondary px-2">商品詳細</span>
+    </h3>
+  </div>
+  <div class="row m-3">
+    <div class="col-3">
+      <%= image_tag @item.get_image(320,240),class:"border border-dark" %>
+    </div>
+    <div class="col-7">
+      <label>商品名</label>　　　　　
+      <%= @item.name %></br>
+      <label>商品紹介</label>　　　　
+      <%= @item.introduction %></br>
+      <label>ジャンル</label>　　　　
+      <%= @item.genre.name %></br>
+      <label>税込価格</br>(税抜価格)</label>　　　
+      <%= @item.with_tax_price.to_s(:delimited) %> (<%= @item.price.to_s(:delimited) %>) 円</br>
+      <label>販売ステータス</label>　
+      <% if @item.is_active == true %>
+        <label class="text-success">販売中</label></br>
+      <% else %>
+        <label class="text-secondary">販売停止中</label></br>
+      <% end %>
+      <%= link_to edit_admin_item_path(@item.id) do %>
+        <label class="btn btn-success">編集する</label>
+      <% end %>
+    </div>
+  </div>
+</div>

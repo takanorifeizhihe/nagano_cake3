@@ -1,19 +1,22 @@
-<p class="border">
-  <span>ジャンル検索</span>
-  <p class="border-top">
-    <% @genres.each do |genre| %>
-      <%= genre.name %></br>
-    <% end %>
-  </p>
-</p>
-
-<h1>商品一覧(全<%= @items.count %>件)</h1>
-  <% @items.each do |item| %>
-    <%= link_to item_path(item.id) do %>
-      <%= image_tag item.get_image(80,80) %>
-    <% end %></br>
-    <%= item.name%></br>
-    ¥<%= item.price%>円</br>
-  <% end %>
-  
-  <%= paginate @items %>
+<div class="container">
+  <div class="row">
+    <div class="col-4 p-3">
+      <%= render 'layouts/genres', genres: @genres %>
+    </div>
+    <div class="col-8">
+      <h1 class="p-3">商品一覧(全<%= @item_all.count %>件)</h1>
+      <div class="d-flex flex-wrap">
+        <% @items.each do |item| %>
+          <div class="p-4">  
+            <%= link_to item_path(item.id) do %>
+              <%= image_tag item.get_image(80,80) %>
+            <% end %></br>
+            <%= item.name%></br>
+            ¥<%= item.price%>円</br>
+          </div>
+        <% end %>
+      </div>
+      <%= paginate @items %>
+    </div>
+  </div>
+</div>

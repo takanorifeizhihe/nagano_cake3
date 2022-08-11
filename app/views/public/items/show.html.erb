@@ -1,27 +1,28 @@
-<p class="border">
-  <span>ジャンル検索</span>
-  <p class="border-top">
-    <% @genres.each do |genre| %>
-      <%= genre.name %></br>
-    <% end %>
-  </p>
-</p>
-
-
-<%= image_tag @item.get_image(80,80) %></br>
-
-<%= @item.name%></br>
-
-<%= @item.introduction %></br>
-
-¥<%= (@item.price * 1.1).floor %>(税込)</br>
-
-<%= form_with model: @cart_item do |f| %>
-  <%= f.hidden_field :item_id, value: @item.id %>
-  <%= f.select :amount, *[1..10],{:prompt => '個数選択'} %>
-  
-  <%= f.submit 'カートに入れる' %>
-<% end %>
-  
+<div class="container">
+  <div class="row">
+    <div class="col-3 p-3">
+      <%= render 'layouts/genres', genres: @genres %>
+    </div>
+    <div class="col-3 p-3">
+      <%= image_tag @item.get_image(320,240) %></br>
+    </div>
+    <div class="col-6 p-3">
+      <label>
+        <strong><%= @item.name%></strong>
+      </label></br>
+      <label>
+        <%= @item.introduction %>
+      </label></br>
+      <label>
+        <strong>¥<%= (@item.price * 1.1).floor %>(税込)</strong></br>
+      </label>
+      <div class="mt-3">
+      <%= form_with model: @cart_item do |f| %>
+        <%= f.hidden_field :item_id, value: @item.id %>
+        <%= f.select :amount, *[1..10],{:prompt => '個数選択'} %>　
+        <%= f.submit 'カートに入れる' ,class:"btn btn-success"%>
+      <% end %>
+      </div>
+        
   
   

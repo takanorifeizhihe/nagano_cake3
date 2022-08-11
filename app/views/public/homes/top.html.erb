@@ -1,45 +1,36 @@
 <div class="container">
   <div class="row">
-    <div class="col">
-      <span class="border">
-        <span class="border">
-          <span>ジャンル検索</span></br>
-        </span>
-        <!--<p class="border-top">-->
-          <% @genres.each do |genre| %>
-              <%= genre.name %></br>
+    <div class="col-3 p-3">
+      <%= render 'layouts/genres', genres: @genres %>
+    </div>
+    <div class="col-9">
+      <div class="jumbotron"  style="background-image: url(/nagano_cake3/app/assets/images/cake_store.jpg); background-size:auto;">
+        <%= image_tag 'cake_store.png', size: '320x240',class:"d-block mx-auto" %>
+        <p class="border">
+          <span>ようこそ、ながのCAKEへ！</br>
+                このサイトは、ケーキ販売のECサイトになります。</br>
+                会員でない方も商品の閲覧はできますが、</br>
+                購入には会員登録が必要になります。</br>
+          </span>
+        </p>
+      </div>
+      <h2><strong>新着商品</strong></h2>
+      <div class="d-flex">
+          <% @items.first(4).each do |item| %>
+          <div class="m-4">  
+            <%= link_to item_path(item.id) do %>
+              <%= image_tag item.get_image(80,80) %>
+            <% end %></br>
+            <%= item.name%></br>
+            ¥<%= item.price%>円</br>
+          </div>
           <% end %>
-        <!--</p>-->
-      </span>
-    </div>
-    <div class="col-5">
-      <p class="border">
-        <span>ようこそ、ながのCAKEへ！</br>
-              このサイトは、ケーキ販売のECサイトになります。</br>
-              会員でない方も商品の閲覧はできますが、</br>
-              購入には会員登録が必要になります。</br>
-        </span>
-      </p>
-    </div>
-    <div class="col">
-    </div>
-  </div>
-  <div class="row">
-    <div class="col">
-    </div>
-    <div class="col-6">
-      <h1>新着商品</h1>
-        <% @items.each do |item| %>
-          <%= image_tag item.get_image(80,80) %></br>
-          <%= item.name%></br>
-          ¥<%= item.price%>円</br>
-        <% end %>
-        
-        <%= link_to items_path do %>
-          <span>すべての商品を見る</span>
-        <% end %>
-    </div>
-    <div class="col">
+      </div>
+      <div class="text-right">
+      <%= link_to items_path do %>
+        <span>すべての商品を見る</span>
+      <% end %>
+      </div>
     </div>
   </div>
 </div>
