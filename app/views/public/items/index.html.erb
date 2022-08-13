@@ -8,11 +8,13 @@
       <div class="d-flex flex-wrap">
         <% @items.each do |item| %>
           <div class="p-4">  
+          <% if item.is_active == true %>
             <%= link_to item_path(item.id) do %>
               <%= image_tag item.get_image(80,80) %>
             <% end %></br>
             <%= item.name%></br>
             ¥<%= item.price%>円</br>
+          <% end %>
           </div>
         <% end %>
       </div>

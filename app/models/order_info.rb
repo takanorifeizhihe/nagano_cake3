@@ -1,7 +1,9 @@
 class OrderInfo < ApplicationRecord
   
   has_many :order_details, dependent: :destroy
+  
   belongs_to :customer
+  
   
   def address_display
     '〒' + postal_code + ' ' + address + ' ' + name

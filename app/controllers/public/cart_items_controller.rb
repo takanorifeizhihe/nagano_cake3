@@ -1,10 +1,9 @@
 class Public::CartItemsController < ApplicationController
   
-  
+  before_action :authenticate_customer!
   
   def index
     @cart_items = current_customer.cart_items
-    
     @sum = 0
     
   end
@@ -12,9 +11,10 @@ class Public::CartItemsController < ApplicationController
   def create
     @cart_item = CartItem.new(cart_item_params)
     @cart_item.customer_id = current_customer.id
+  
     #binding.pry
     #下記の記述でなんでできたか質問する
-    if @already_cart_item = CartItem.find_by(item_id: params[:cart_item][:item_id])
+    if @already_cart_item = current_customer.cart_items.find_by(item_id: params[:cart_item][:item_id])
       @already_cart_item.amount += params[:cart_item][:amount].to_i
 			@already_cart_item.save
       #@cart_item.update(cart_item_params)

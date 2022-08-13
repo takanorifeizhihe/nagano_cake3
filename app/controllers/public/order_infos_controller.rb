@@ -14,29 +14,33 @@ class Public::OrderInfosController < ApplicationController
   def create
     @order_info = OrderInfo.new(order_info_params)
     @order_info.customer_id = current_customer.id
-    @order_info.save
-    cart_items = current_customer.cart_items
-    
-    cart_items.each do |cart_item|
-      order_detail = OrderDetail.new
-      order_detail.order_info_id = @order_info.id
-      order_detail.item_id= cart_item.item_id
-      order_detail.amount = cart_item.amount
-      order_detail.price = (cart_item.item.price * 1.1).floor
-      order_detail.save
-    end
+    if @order_info.save
+      cart_items = current_customer.cart_items
+      
+      cart_items.each do |cart_item|
+        order_detail = OrderDetail.new
+        order_detail.order_info_id = @order_info.id
+        order_detail.item_id= cart_item.item_id
+        order_detail.amount = cart_item.amount
+        order_detail.price = (cart_item.item.price * 1.1).floor
+        order_detail.save
+      end
        
-    cart_items.destroy_all
-    redirect_to order_infos_complete_path
+      cart_items.destroy_all
+      redirect_to order_infos_complete_path
+    else
+      render action: :confirm
+    end
   end
 
   def show
+    @sum = 0
     @order_info = OrderInfo.find(params[:id])
     @order_details = @order_info.order_details
   end
 
   def confirm
-    @cart_items = CartItem.all
+    @cart_items = current_customer.cart_items
     @sum = 0
     @order_info = OrderInfo.new(order_info_params)
     if params[:order_info][:@select_address] == '0'
@@ -58,8 +62,6 @@ class Public::OrderInfosController < ApplicationController
   end
 
   def complete
-    
-    
     
   end
   

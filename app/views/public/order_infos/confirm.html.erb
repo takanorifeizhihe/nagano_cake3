@@ -34,14 +34,14 @@
       </table>
     </div>
     <div class="col-4 m-3">
-      <table class="border">
+      <table class="table table-hover table-inverse">
         <tr class="border">
           <td class="table-secondary">送料</th>
           <td><% @postage = 800  %><%= @postage %></th>
         </tr>
         <tr class="border">
           <td class="table-secondary">合計金額</th>
-          <td><%= @sum  %></th>
+          <td><%= @sum.to_s(:delimited)  %></th>
         </tr>
         <tr class="border">
           <td class="table-secondary">請求金額</th>

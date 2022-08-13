@@ -4,7 +4,7 @@
       <span class="bg-secondary px-2">配送先登録/一覧</span>
     </h3>
   </div>
-  <form class="form-horizontal">
+ 
     <%= form_with model:@address, url: '/addresses', method: :post do |f| %>
       <div class="form-group">
         <%= f.label :'郵便番号(ハイフンなし)' %> 
@@ -22,7 +22,7 @@
         <%= f.submit "新規登録",class:"btn btn-success" %>
       </div>
     <% end %>
-  </form>
+  
   <div class="row m-3">
     <div class="col-7">
       <table class="table table-hover table-inverse">

@@ -17,12 +17,14 @@
       <h2><strong>新着商品</strong></h2>
       <div class="d-flex">
           <% @items.first(4).each do |item| %>
-          <div class="m-4">  
+          <div class="m-4">
+          <% if item.is_active == true %>    
             <%= link_to item_path(item.id) do %>
               <%= image_tag item.get_image(80,80) %>
             <% end %></br>
             <%= item.name%></br>
             ¥<%= item.price%>円</br>
+          <% end %>
           </div>
           <% end %>
       </div>
